@@ -1,5 +1,10 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
+import { GetGithubEmail } from "../../../auth/GetGithubEmail";
+import client from "../../../apollo-client";
+import { REGISTER } from "../../../Apollo/RegisterMutation";
+import { generateId } from "../../../utils/GenerateId";
+import { LOGIN } from "../../../Apollo/LoginMutation";
 
 export default NextAuth({
   providers: [
@@ -18,5 +23,34 @@ export default NextAuth({
     signOut: "/auth/signout",
     verifyRequest: "/auth/verify-request",
     newUser: null,
+  },
+  debug: true,
+  callbacks: {
+    signIn: async (profile, account): Promise<any> => {
+      await GetGithubEmail(profile, account);
+      try {
+        await client.mutate({
+          mutation: REGISTER,
+          variables: {
+            username: profile.name,
+            email: profile.email,
+            profilePicture: profile.image,
+            id: generateId(24),
+          },
+        });
+        return true;
+      } catch (error) {
+        console.log(error);
+        if (!error.message.includes("Account")) {
+          await client.mutate({
+            mutation: LOGIN,
+            variables: {
+              email: profile.email,
+            },
+          });
+          return true;
+        }
+      }
+    },
   },
 });

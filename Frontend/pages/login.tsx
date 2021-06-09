@@ -72,7 +72,9 @@ export default function Login({ myProviders }: any) {
               return (
                 <div
                   style={{ marginTop: 10, marginLeft: 785 }}
-                  onClick={() => signIn(p.id)}
+                  onClick={() =>
+                    signIn(p.id, { callbackUrl: "http://localhost:3000/home" })
+                  }
                 >
                   <a
                     className={`btn btn-primary btn-block py-2 mb-3 ${styles.btnGoogle}`}
@@ -96,7 +98,9 @@ export default function Login({ myProviders }: any) {
               return (
                 <div
                   style={{ marginTop: -330, marginLeft: 785 }}
-                  onClick={() => signIn(p.id)}
+                  onClick={() =>
+                    signIn(p.id, { callbackUrl: "http://localhost:3000/home" })
+                  }
                 >
                   <a
                     className={`btn btn-primary btn-block py-2 mb-3 ${styles.btnGithub}`}

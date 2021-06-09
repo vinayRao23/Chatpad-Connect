@@ -1,0 +1,17 @@
+.sideBar {
+  height: 1000px;
+  width: 265px;
+  background-color: #f6fbff;
+}
+
+.tab {
+  height: 75px;
+  width: 210px;
+  color: white;
+  font-size: 20px;
+  background-color: #2d2a2e;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
