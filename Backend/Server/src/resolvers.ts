@@ -11,7 +11,7 @@ const resolverMap: IResolvers = {
   },
   Mutation: {
     registerUser: async (_: void, args: UserArgsInt) => {
-      await User.sync({ force: true });
+      // await User.sync({ force: true });
       try {
         if (await User.findOne({ email: { id: args.email } })) {
           return "Account with the given email already exists";
