@@ -1,20 +1,29 @@
-import React from "react";
+import { useSession } from "next-auth/client";
+import React, { useEffect, useState } from "react";
+import { DropDownMenu } from "../components/dropDownMenu";
 import styles from "../styles/Homepage.module.css";
+import SideBar from "../components/sideBar";
+import NavBar from "../components/navBar";
 
 const home = () => {
+  const [session] = useSession();
+  useEffect(() => {
+    console.log(session);
+  }, [session]);
   return (
     <>
-      <div className={styles.sideBar}>
-        <div style={{ position: "relative", bottom: 50 }}>
-          <img src="/chatpadconnectlogo.png" alt="" />
-        </div>
-        <div className={styles.tab} style={{ top: -25, position: "relative" }}>
-          <i
-            className="fa fa-home fa-2x"
-            style={{ position: "relative", right: -40, bottom: -17 }}
-          />
-          <div style={{ left: 86, top: -15.5, position: "relative" }}>Home</div>
-        </div>
+      <SideBar />
+      <NavBar />
+      <div>
+        <img
+          src="/chatpadconnectlogo.png"
+          alt=""
+          style={{ width: 450, height: 400, marginLeft: 570, marginTop: 50 }}
+        />
+        <h3 style={{ marginLeft: 380, marginTop: -100, fontWeight: "lighter" }}>
+          To get started using ChatPad Connect, click the "Meet" tab so you can
+          start an instant meet.
+        </h3>
       </div>
     </>
   );
